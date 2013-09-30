@@ -1,0 +1,20 @@
+<h1>Listing tasks</h1>
+
+<div ng-controller="TasksCtrl">
+  <ul>
+    <li ng-repeat="task in tasks">
+      {{task.name}}
+    </li>
+  </ul>
+  <form ng-submit="create()">
+    <input type="text" ng-model="task.name">
+    <input type="checkbox" ng-model="task.done">
+    <input type="submit">
+  </form>
+</div>
+
+
+
+<br>
+
+<%= link_to 'New Task', new_task_path %>

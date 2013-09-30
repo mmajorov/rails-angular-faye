@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyText
+  done: false
+
+two:
+  name: MyText2
+  done: false
+
+three:
+  name: MyText3
+  done: true
