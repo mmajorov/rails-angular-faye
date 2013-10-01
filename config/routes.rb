@@ -1,5 +1,4 @@
 RailsAngularFaye::Application.routes.draw do
-  faye_server '/faye', timeout: 25
 
   resources :tasks
 
