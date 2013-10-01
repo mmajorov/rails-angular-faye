@@ -2,9 +2,9 @@ require 'eventmachine'
 
 class Task < ActiveRecord::Base
 	validates :name, presence: true
-  after_create :notify_faye
+  after_create :notify_create
 
-  def notify_faye
-    Bayeux.client.publish('/tasks/new', 'text' => 'Task created')
+  def notify_create
+    Bayeux.client.publish('/tasks/new', task: self.attributes)
   end
 end

@@ -10,14 +10,12 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
   			done: $scope.task.done
   		,
   		(response)->
-  			$scope.tasks.push response
   			console.log(response)
   		,
   		(response)->
   			console.log(response)
   	)
 
-  $faye.on '/tasks/new', (data) ->
-    console.log('in faye')
-    console.log(data)
+  $faye.on '/tasks/new', (task) ->
+    $scope.tasks.push new $task task.task
 ]
