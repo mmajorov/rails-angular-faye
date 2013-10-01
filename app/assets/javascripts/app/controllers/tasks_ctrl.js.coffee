@@ -1,4 +1,4 @@
-App.controller 'TasksCtrl', ['$scope', 'Task', ($scope, $task) ->
+App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
   $scope.message = "Angular Rocks!"
   $scope.tasks = $task.query()
 
@@ -16,4 +16,8 @@ App.controller 'TasksCtrl', ['$scope', 'Task', ($scope, $task) ->
   		(response)->
   			console.log(response)
   	)
+
+  $faye.on '/tasks/new', (data) ->
+    console.log('in faye')
+    console.log(data)
 ]
