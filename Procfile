@@ -1,2 +1,2 @@
 web: thin start
-faye: rackup faye.ru -s thin -E development
+faye: rackup faye.ru -s thin -E production
