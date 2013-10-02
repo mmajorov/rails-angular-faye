@@ -1,5 +1,5 @@
 App.factory 'Faye', ($rootScope) ->
-  faye = new Faye.Client('http://localhost:9292/faye')
+  faye = new Faye.Client('http://'+document.domain+':9292/faye')
 
   on: (channel, callback) ->
     faye.subscribe channel, () ->

@@ -4,7 +4,7 @@
   <title>RailsAngularFaye</title>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= stylesheet_link_tag    "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" %>
-  <%= javascript_include_tag "http://localhost:9292/faye/client.js" %>
+  <%= javascript_include_tag "http://"+request.host+":9292/faye/client.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
