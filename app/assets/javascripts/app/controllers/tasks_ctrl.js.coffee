@@ -3,6 +3,16 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
   $scope.tasks = $task.query()
   $scope.selectedTask = null
 
+  $scope.resetForm = ->
+    $scope.selectedTask = null
+    $scope.task = null
+
+  $scope.submit = ->
+    if $scope.selectedTask
+      $scope.update()
+    else
+      $scope.create()
+
   $scope.create = ->
   	$task.save(
   		{},
@@ -11,7 +21,8 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
   			done: $scope.task.done
   		,
   		(response)-> #success
-  			console.log(response)
+        console.log(response)
+        $scope.resetForm()
   		,
   		(response)-> #fail
   			console.log(response)
@@ -19,7 +30,11 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
 
   $scope.edit = (task)->
     $scope.selectedTask = task
-    $scope.task = task
+    $scope.task = angular.copy task
+
+  $scope.update = ->
+    $scope.task.$update()
+    $scope.resetForm()
 
   $faye.on '/tasks/new', (task) ->
     $scope.tasks.push new $task task.task
