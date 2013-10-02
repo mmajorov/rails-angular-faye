@@ -38,4 +38,12 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
 
   $faye.on '/tasks/new', (task) ->
     $scope.tasks.push new $task task.task
+
+  $faye.on '/tasks/update', (task) ->
+    console.log(task)
+    $scope.tasks.forEach (t) ->
+      if t.id == task.task.id
+        console.log('find task', t)
+        t.name = task.task.name
+        t.done = task.task.done
 ]
