@@ -7,7 +7,7 @@
           <th>Name</th>
           <th>Status</th>
         </tr>
-        <tr ng-repeat="task in tasks">
+        <tr ng-repeat="task in tasks" ng-click="edit(task)" ng-class="{success: task == selectedTask}">
           <td>{{task.name}}</td>
           <td>
             <span class="label label-success" ng-show="task.done">done</span>

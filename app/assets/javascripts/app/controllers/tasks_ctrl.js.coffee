@@ -1,6 +1,7 @@
 App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
   $scope.message = "Angular Rocks!"
   $scope.tasks = $task.query()
+  $scope.selectedTask = null
 
   $scope.create = ->
   	$task.save(
@@ -9,12 +10,16 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
   			name: $scope.task.name
   			done: $scope.task.done
   		,
-  		(response)->
+  		(response)-> #success
   			console.log(response)
   		,
-  		(response)->
+  		(response)-> #fail
   			console.log(response)
   	)
+
+  $scope.edit = (task)->
+    $scope.selectedTask = task
+    $scope.task = task
 
   $faye.on '/tasks/new', (task) ->
     $scope.tasks.push new $task task.task
