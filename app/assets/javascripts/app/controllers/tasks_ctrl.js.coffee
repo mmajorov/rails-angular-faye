@@ -43,7 +43,6 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
     console.log(task)
     $scope.tasks.forEach (t) ->
       if t.id == task.task.id
-        console.log('find task', t)
         t.name = task.task.name
         t.done = task.task.done
 ]
