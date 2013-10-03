@@ -60,6 +60,26 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'TaskItem', 'Faye', ($scope, $tas
       if i.id == task.task.id
         $scope.tasks.splice(_i,1);
 
+
+  #task items
+  $scope.itemSubmit = ->
+    $scope.itemCreate()
+
+  $scope.itemCreate = ->
+    $task_item.save(
+      {
+        task_id: $scope.task.id
+      },
+      task_item:
+        name: $scope.item.name
+      ,
+      (response) -> #success
+        console.log(response)
+      ,
+      (response) -> #fail
+        console.log(response)
+    )
+
   $faye.on '/task_items/new', (task_item) ->
     console.log task_item
     return unless $scope.task.id

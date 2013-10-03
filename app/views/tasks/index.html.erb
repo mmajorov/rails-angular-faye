@@ -66,6 +66,19 @@
             <td>{{item.name}}</td>
           </tr>
         </table>
+
+        <form name="taskItemForm" role="form" class="form-inline" ng-submit="itemSubmit()">
+          <div class="form-group">
+            <label for="item_name" class="sr-only">Name</label>
+            <input type="text" name="name" id="item_name" class="form-control" ng-model="item.name" placeholder="Введите имя" required>
+            <div ng-show="taskItemForm.name.$dirty && taskItemForm.name.$invalid">
+              Ошибка:
+              <span ng-show="taskItemForm.name.$error.required">Введите имя</span>
+            </div>
+          </div>
+
+          <input type="submit" class="btn btn-success" value="Создать"/>
+        </form>
       </div>
     </div>
   </div>
