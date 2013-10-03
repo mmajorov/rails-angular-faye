@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_task
+  before_action :set_task_item, only: [:show, :destroy]
 
   # GET /tasks/:task_id/items
   # GET /tasks/:task_id/items.json
@@ -29,10 +30,24 @@ class ItemsController < ApplicationController
     end
   end
 
+  # DELETE /tasks/:task_id/items/1
+  # DELETE /tasks/:task_id/items/1.json
+  def destroy
+    @task_item.destroy
+    respond_to do |format|
+      format.html { redirect_to task_items_url(@task) }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:task_id])
+    end
+
+    def set_task_item
+      @task_item = @task.task_items.where(id: params[:id]).first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

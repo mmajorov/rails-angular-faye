@@ -80,11 +80,16 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'TaskItem', 'Faye', ($scope, $tas
         console.log(response)
     )
 
+  $scope.itemDestroy = (item)->
+    item.$delete()
+
   $faye.on '/task_items/new', (task_item) ->
-    console.log task_item
     return unless $scope.task.id
-    console.log "scope task has id", $scope.task
     return unless $scope.task.id == task_item.task_item.task_id
-    console.log "scope task id eq task_item id"
     $scope.task.items.push new $task_item task_item.task_item
+
+  $faye.on '/task_items/destroy', (task_item) ->
+    for i in $scope.task.items
+      if i.id == task_item.task_item.id
+        $scope.task.items.splice(_i,1);
 ]

@@ -61,9 +61,11 @@
         <table class="table table-striped table-bordered">
           <tr>
             <th>Name</th>
+            <th></th>
           </tr>
           <tr ng-repeat="item in task.items">
             <td>{{item.name}}</td>
+            <td><a class="btn btn-danger btn-xs" ng-click="itemDestroy(item)">Delete</a></td>
           </tr>
         </table>
 
