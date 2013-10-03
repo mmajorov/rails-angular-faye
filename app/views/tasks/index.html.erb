@@ -5,10 +5,12 @@
       <table class="table table-striped table-bordered">
         <tr>
           <th>Name</th>
+          <th>Email</th>
           <th>Status</th>
         </tr>
         <tr ng-repeat="task in tasks" ng-click="edit(task)" ng-class="{success: task == selectedTask}">
           <td>{{task.name}}</td>
+          <td>{{task.email}}</td>
           <td>
             <span class="label label-success" ng-show="task.done">done</span>
             <span class="label label-info" ng-hide="task.done">in progress</span>
@@ -19,21 +21,38 @@
     <div class="col-md-4">
       <h1>Form</h1>
       <div class="well">
-          <form ng-submit="submit()" role="form">
+          <form name="taskForm" ng-submit="submit()" role="form" novalidate>
             <div class="form-group">
                 <label for="task_name">Name</label>
-                <input type="text" id="task_name" class="form-control" ng-model="task.name" required>
+                <input type="text" name="name" id="task_name" class="form-control" ng-model="task.name" required>
+                <div ng-show="taskForm.name.$dirty && taskForm.name.$invalid">
+                  Ошибка:
+                  <span ng-show="taskForm.name.$error.required">Введите имя</span>
+                </div>
+
             </div>
+            <div class="form-group" ng-class="{'has-error': taskForm.email.$dirty && taskForm.email.$invalid}">
+                <label for="task_email" class="control-label">Email</label>
+                <input type="email" name="email" id="task_email" class="form-control" ng-model="task.email" required>
+
+                <div ng-show="taskForm.email.$dirty && taskForm.email.$invalid">
+                  Ошибка:
+                  <span ng-show="taskForm.email.$error.required">Введите email</span>
+                  <span ng-show="taskForm.email.$error.email">Неверный формат</span>
+                </div>
+            </div>
+
             <div class="form-group">
               <label>
-                <input type="checkbox" ng-model="task.done">
+                <input type="checkbox" name="done" ng-model="task.done">
                 Done?
               </label>
             </div>
             <input type="submit"
                    class="btn btn-default"
                    value="{{ selectedTask && 'Сохранить' || 'Создать  ' }}"
-                   ng-class="{'btn-success': !selectedTask, 'btn-warning': selectedTask}">
+                   ng-class="{'btn-success': !selectedTask, 'btn-warning': selectedTask}"
+                   ng-disabled="taskForm.$invalid">
             <a class="btn btn-danger pull-right" ng-show="task.id" ng-click="destroy()">Delete</a>
           </form>
       </div>

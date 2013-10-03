@@ -18,6 +18,7 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
   		{},
   		task:
   			name: $scope.task.name
+  			email: $scope.task.email
   			done: $scope.task.done
   		,
   		(response)-> #success
@@ -29,6 +30,7 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
   	)
 
   $scope.edit = (task)->
+    $scope.resetForm()
     $scope.selectedTask = task
     $scope.task = angular.copy task
 
@@ -48,6 +50,7 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
     $scope.tasks.forEach (t) ->
       if t.id == task.task.id
         t.name = task.task.name
+        t.email = task.task.email
         t.done = task.task.done
 
   $faye.on '/tasks/destroy', (task) ->
