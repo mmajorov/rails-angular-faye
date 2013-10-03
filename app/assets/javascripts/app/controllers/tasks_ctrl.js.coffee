@@ -59,4 +59,12 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'TaskItem', 'Faye', ($scope, $tas
     for i in $scope.tasks
       if i.id == task.task.id
         $scope.tasks.splice(_i,1);
+
+  $faye.on '/task_items/new', (task_item) ->
+    console.log task_item
+    return unless $scope.task.id
+    console.log "scope task has id", $scope.task
+    return unless $scope.task.id == task_item.task_item.task_id
+    console.log "scope task id eq task_item id"
+    $scope.task.items.push new $task_item task_item.task_item
 ]
