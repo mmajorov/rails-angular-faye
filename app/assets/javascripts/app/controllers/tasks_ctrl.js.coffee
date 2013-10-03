@@ -60,10 +60,15 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'TaskItem', 'Faye', ($scope, $tas
       if i.id == task.task.id
         $scope.tasks.splice(_i,1);
 
-
+  ###################
+  ###################
   #task items
+  $scope.resetItemForm = ->
+    $scope.item = null
+
   $scope.itemSubmit = ->
     $scope.itemCreate()
+    $scope.resetItemForm()
 
   $scope.itemCreate = ->
     $task_item.save(

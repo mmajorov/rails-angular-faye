@@ -26,7 +26,7 @@
       <h1>Form</h1>
       <div class="well">
           <form name="taskForm" ng-submit="submit()" role="form" novalidate>
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': taskForm.name.$dirty && taskForm.name.$invalid}">
                 <label for="task_name">Name</label>
                 <input type="text" name="name" id="task_name" class="form-control" ng-model="task.name" required>
                 <div ng-show="taskForm.name.$dirty && taskForm.name.$invalid">
@@ -77,10 +77,6 @@
           <div class="form-group">
             <label for="item_name" class="sr-only">Name</label>
             <input type="text" name="name" id="item_name" class="form-control" ng-model="item.name" placeholder="Введите имя" required>
-            <div ng-show="taskItemForm.name.$dirty && taskItemForm.name.$invalid">
-              Ошибка:
-              <span ng-show="taskItemForm.name.$error.required">Введите имя</span>
-            </div>
           </div>
 
           <input type="submit" class="btn btn-success" value="Создать"/>
