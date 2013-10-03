@@ -1,6 +1,8 @@
 RailsAngularFaye::Application.routes.draw do
 
-  resources :tasks
+  resources :tasks do
+    resources :items
+  end
 
   root 'tasks#index'
 

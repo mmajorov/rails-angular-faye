@@ -2,6 +2,9 @@ require 'eventmachine'
 
 class Task < ActiveRecord::Base
 	validates :name, :email, presence: true
+
+  has_many :task_items
+
   after_create :notify_create
   after_update :notify_update
   after_destroy :notify_destroy

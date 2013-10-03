@@ -56,6 +56,17 @@
             <a class="btn btn-danger pull-right" ng-show="task.id" ng-click="destroy()">Delete</a>
           </form>
       </div>
+      <div ng-show="task.id">
+        <h1>Task Items</h1>
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th>Name</th>
+          </tr>
+          <tr ng-repeat="item in task.items">
+            <td>{{item.name}}</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 

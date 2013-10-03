@@ -1,4 +1,4 @@
-App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
+App.controller 'TasksCtrl', ['$scope', 'Task', 'TaskItem', 'Faye', ($scope, $task, $task_item, $faye) ->
   $scope.message = "Angular Rocks!"
   $scope.tasks = $task.query()
   $scope.selectedTask = null
@@ -33,6 +33,7 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'Faye', ($scope, $task, $faye) ->
     $scope.resetForm()
     $scope.selectedTask = task
     $scope.task = angular.copy task
+    $scope.task.items = $task_item.query(task_id: $scope.task.id)
 
   $scope.update = ->
     $scope.task.$update()
