@@ -1,4 +1,19 @@
 <div class="container" ng-controller="TasksCtrl">
+  <div>&nbsp;</div>
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="list-inline">
+        <li>Online Users:</li>
+        <li ng-repeat="user in onlineUsers">
+            <span
+                class="label"
+                ng-class="{'label-success': user.id == clientId(), 'label-default': user.id != clientId()}">
+              {{user.name}}
+            </span>
+        </li>
+      </ul>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-8">
       <h1>Listing tasks</h1>

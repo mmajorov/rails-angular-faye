@@ -32,6 +32,7 @@ gem 'angularjs-rails'
 gem 'faye'
 gem 'thin'
 gem 'foreman'
+gem 'hashie'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

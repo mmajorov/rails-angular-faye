@@ -2,6 +2,9 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'TaskItem', 'Faye', ($scope, $tas
   $scope.message = "Angular Rocks!"
   $scope.tasks = $task.query()
   $scope.selectedTask = null
+  $scope.onlineUsers = []
+  $scope.clientId = () ->
+    $faye.clientId()
 
   $scope.resetForm = ->
     $scope.selectedTask = null
@@ -97,4 +100,10 @@ App.controller 'TasksCtrl', ['$scope', 'Task', 'TaskItem', 'Faye', ($scope, $tas
     for i in $scope.task.items
       if i.id == task_item.task_item.id
         $scope.task.items.splice(_i,1);
+
+  ######################
+  ######users###########
+  ######################
+  $faye.on '/users/list', (list) ->
+    $scope.onlineUsers = JSON.parse list
 ]

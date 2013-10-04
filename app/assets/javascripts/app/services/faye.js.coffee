@@ -11,3 +11,6 @@ App.factory 'Faye', ($rootScope) ->
     faye.publish channel, data
     if callback
       callback arguments
+
+  clientId: () ->
+    faye._clientId
