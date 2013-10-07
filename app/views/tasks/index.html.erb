@@ -22,6 +22,7 @@
           <th>Name</th>
           <th>Email</th>
           <th>Status</th>
+          <th>Edit</th>
         </tr>
         <tr ng-repeat="task in tasks" ng-click="edit(task)" ng-class="{success: task == selectedTask}">
           <td>{{task.name}}</td>
@@ -30,6 +31,7 @@
             <span class="label label-success" ng-show="task.done">done</span>
             <span class="label label-info" ng-hide="task.done">in progress</span>
           </td>
+          <td><a href="/tasks/{{task.id}}/edit">edit</a></td>
         </tr>
       </table>
       <%= link_to 'New Task', new_task_path , class: 'btn btn-default'%>
@@ -41,7 +43,6 @@
       <h1>Form</h1>
       <div class="well">
           <form name="taskForm" ng-submit="submit()" role="form" novalidate>
-            <div resource-locker="tasks" resource-id="{{task.id}}">1</div>
             <div class="form-group" ng-class="{'has-error': taskForm.name.$dirty && taskForm.name.$invalid}">
                 <label for="task_name">Name</label>
                 <input type="text" name="name" id="task_name" class="form-control" ng-model="task.name" required>

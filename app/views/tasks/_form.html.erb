@@ -11,16 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <% unless @task.new_record? %>
+        <div resource-locker="tasks" resource-id="<%= @task.id %>">locker</div>
+  <% end %>
+
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_area :name %>
+    <%= f.text_area :name, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email %><br>
-    <%= f.text_field :email, type: :email %>
+    <%= f.text_field :email, type: :email, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :done %><br>
     <%= f.check_box :done %>
   </div>
