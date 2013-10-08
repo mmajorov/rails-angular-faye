@@ -1,43 +1,51 @@
-<h1>Listing rubrics</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+        <h1>Listing rubrics</h1>
 
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Parent</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  </thead>
+        <table>
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Parent</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
 
-  <tbody>
-  <% @rubrics.each do |rubric| %>
-      <tr>
-        <td><%= rubric.name %></td>
-        <td><%= rubric.parent_id %></td>
-        <td><%= link_to 'Show', rubric %></td>
-        <td><%= link_to 'Edit', edit_rubric_path(rubric) %></td>
-        <td><%= link_to 'Destroy', rubric, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+          <tbody>
+          <% @rubrics.each do |rubric| %>
+              <tr>
+                <td><%= rubric.name %></td>
+                <td><%= rubric.parent_id %></td>
+                <td><%= link_to 'Show', rubric %></td>
+                <td><%= link_to 'Edit', edit_rubric_path(rubric) %></td>
+                <td><%= link_to 'Destroy', rubric, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <br>
+      <%= link_to 'New Rubric', new_rubric_path %>
+    </div>
+    <div class="col-md-6">
+      <h1>Tree rubrics</h1>
+        <div ng-controller="RubricsCtrl">
+          <ul>
+            <li ng-repeat="rubric in rubrics" ng-include="'tree_item_renderer.html'"></li>
+          </ul>
+        </div>
 
-<div class="container" ng-controller="RubricsCtrl">
-  <ul>
-    <li ng-repeat="rubric in rubrics" ng-include="'tree_item_renderer.html'"></li>
-  </ul>
+        <script type="text/ng-template"  id="tree_item_renderer.html">
+          {{rubric.name}}
+          <a ng-click="loadChildren(rubric)" class="btn btn-default btn-xs">+</a>
+          <ul>
+            <li ng-repeat="rubric in rubric.nodes" ng-include="'tree_item_renderer.html'"></li>
+          </ul>
+        </script>
+
+        <br>
+    </div>
+  </div>
 </div>
-
-<script type="text/ng-template"  id="tree_item_renderer.html">
-  {{rubric.name}}
-  <a ng-click="loadChildren(rubric)" class="btn btn-default btn-xs">+</a>
-  <ul>
-    <li ng-repeat="rubric in rubric.nodes" ng-include="'tree_item_renderer.html'"></li>
-  </ul>
-</script>
-
-<br>
-
-<%= link_to 'New Rubric', new_rubric_path %>
