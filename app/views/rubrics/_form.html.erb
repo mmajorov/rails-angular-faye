@@ -17,7 +17,9 @@
   </div>
   <div class="field">
     <%= f.label :parent_id %><br>
-    <%= f.number_field :parent_id %>
+    <%= f.select :parent_id, nested_set_options(Rubric, @rubric) {|i|
+             "#{'–' * i.level} #{i.name}"
+           } %>
   </div>
   <div class="actions">
     <%= f.submit %>
