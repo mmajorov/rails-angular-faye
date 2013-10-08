@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @rubric.name %>
+</p>
+
+<p>
+  <strong>Parent:</strong>
+  <%= @rubric.parent_id %>
+</p>
+
+<%= link_to 'Edit', edit_rubric_path(@rubric) %> |
+<%= link_to 'Back', rubrics_path %>

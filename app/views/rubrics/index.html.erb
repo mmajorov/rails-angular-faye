@@ -1,0 +1,29 @@
+<h1>Listing rubrics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Parent</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rubrics.each do |rubric| %>
+      <tr>
+        <td><%= rubric.name %></td>
+        <td><%= rubric.parent_id %></td>
+        <td><%= link_to 'Show', rubric %></td>
+        <td><%= link_to 'Edit', edit_rubric_path(rubric) %></td>
+        <td><%= link_to 'Destroy', rubric, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rubric', new_rubric_path %>

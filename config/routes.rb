@@ -4,6 +4,8 @@ RailsAngularFaye::Application.routes.draw do
     resources :items
   end
 
+  resources :rubrics
+
   root 'tasks#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
