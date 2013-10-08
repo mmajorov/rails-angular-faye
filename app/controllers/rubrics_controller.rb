@@ -1,15 +1,25 @@
 class RubricsController < ApplicationController
-  before_action :set_rubric, only: [:show, :edit, :update, :destroy]
+  before_action :set_rubric, only: [:show, :edit, :update, :destroy, :children]
 
   # GET /rubrics
   # GET /rubrics.json
   def index
-    @rubrics = Rubric.all
+    respond_to do |format|
+      format.html {@rubrics = Rubric.all}
+      format.json {@rubrics = Rubric.where(parent_id: nil).all}
+    end
   end
 
   # GET /rubrics/1
   # GET /rubrics/1.json
   def show
+  end
+
+  # GET /rubrics/1/children
+  # GET /rubrics/1/children.json
+  def children
+    @rubrics = @rubric.children
+    render :index
   end
 
   # GET /rubrics/new

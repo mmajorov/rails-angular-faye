@@ -4,7 +4,11 @@ RailsAngularFaye::Application.routes.draw do
     resources :items
   end
 
-  resources :rubrics
+  resources :rubrics do
+    member do
+      get :children
+    end
+  end
 
   root 'tasks#index'
 
