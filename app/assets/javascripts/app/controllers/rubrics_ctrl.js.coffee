@@ -15,14 +15,19 @@ App.controller 'RubricsCtrl', ['$scope', 'Rubric', 'Faye', ($scope, $rubric, $fa
         $scope.all_rubrics[r.id] = r
 
 
-  $faye.on '/rubrics/new', (task) ->
-    $scope.tasks.push new $task task.task
+  $faye.on '/rubrics/new', (rubric) ->
+    res = new $rubric rubric.rubric
+    res.nodes = []
+    $scope.all_rubrics[res.id] = res
+
+    if res.parent_id
+      $scope.all_rubrics[res.parent_id].nodes.push res
+    else
+      $scope.rubrics.push res
 
   $faye.on '/rubrics/update', (rubric) ->
-    console.log(rubric)
     if $scope.all_rubrics[rubric.rubric.id]
       $scope.all_rubrics[rubric.rubric.id].name = rubric.rubric.name
-    console.log $scope.all_rubrics
 
   $faye.on '/rubrics/destroy', (task) ->
     console.log(task)

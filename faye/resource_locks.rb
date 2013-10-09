@@ -47,6 +47,7 @@ class ResourceLocks
   end
 
   def on_release msg
+    return
     user_locks[msg.clientId].each do |lock_name|
       lock = locks[lock_name]
       lock[:users].delete(msg.clientId) if lock[:users].include? msg.clientId
